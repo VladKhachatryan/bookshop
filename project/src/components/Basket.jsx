@@ -1,6 +1,10 @@
+import { useContext } from "react"
 import { BasketItem } from "./BasketItem"
+import { UserContext } from "../context"
 
-export const Basket=({items,addCount,removeCount,removeFromBusket})=>{
+export const Basket=()=>{
+    const {state:{busket}}=useContext(UserContext)
+    console.log(busket);
     return <div>
         <h1>Basket</h1>
     <button>Sell</button>
@@ -17,11 +21,9 @@ export const Basket=({items,addCount,removeCount,removeFromBusket})=>{
 
     </thead>
     <tbody>
-        {
-            items.map(elm=><BasketItem key={elm.id} {...elm} addCount={addCount} removeCount={removeCount}  removeFromBusket={removeFromBusket}/>)
-           
-            
-        }
+                    {busket.map(elm => (
+                        <BasketItem key={elm.id} {...elm} />
+                    ))}
        
     </tbody>
     </table>    
