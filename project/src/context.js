@@ -27,8 +27,6 @@ export const reducer = (state, action) => {
             const productToMove = state.products.find(elm => elm.id === action.payload)
             if (productToMove) {
                 return {
-
-                    func: console.log(initialState.busket),
                     ...state,
                     busket: [...state.busket, { ...productToMove, count: 2 }]
                 }

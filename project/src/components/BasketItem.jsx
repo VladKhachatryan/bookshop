@@ -3,7 +3,6 @@ import { useContext } from "react"
 
 export const BasketItem=({title,price,count=1,id})=>{
     const {dispatch}=useContext(UserContext)
-    console.log(id);
     return <tr>
         <td>{title}</td>
         <td>{price}</td>

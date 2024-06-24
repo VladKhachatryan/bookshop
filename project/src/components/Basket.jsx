@@ -4,7 +4,6 @@ import { UserContext } from "../context"
 
 export const Basket=()=>{
     const {state:{busket}}=useContext(UserContext)
-    console.log(busket);
     return <div>
         <h1>Basket</h1>
     <button>Sell</button>
@@ -21,9 +20,8 @@ export const Basket=()=>{
 
     </thead>
     <tbody>
-                    {busket.map(elm => (
-                        <BasketItem key={elm.id} {...elm} />
-                    ))}
+                {busket.map(elm => ( <BasketItem key={elm.id} {...elm} />
+      ))}
        
     </tbody>
     </table>    
