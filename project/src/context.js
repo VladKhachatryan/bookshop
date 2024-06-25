@@ -24,16 +24,24 @@ export const reducer = (state, action) => {
     switch (action.type) {
         case "move":
             const ProductInBusket = state.busket.find(elm => elm.id === action.payload)
+
             const productToMove = state.products.find(elm => elm.id === action.payload)
             if (productToMove) {
-                return {
-                    ...state,
-                    busket: [...state.busket, { ...productToMove, count: 2 }]
+                if (ProductInBusket) {
+                    return {
+                        ...state,
+                        busket: state.busket.map(elm =>
+                            elm.id === action.payload ? { ...elm, count: elm.count + 1 } : elm
+                        )
+                    };
+                } else {
+                    return {
+                        ...state,
+                        busket: [...state.busket, { ...productToMove, count: 1 }]
+                    };
                 }
-            } 
-
-
-                return state
+            }
+            return state
         case "remove":
             return {
                 ...state,
@@ -45,14 +53,14 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 busket: state.busket.map(elm => {
-                    elm.id === action.payload ? { ...elm, count: elm.count + 1 } : elm
+                    return elm.id === action.payload ? { ...elm, count: elm.count + 1 } : elm
                 })
             }
         case "disCount":
             return {
                 ...state,
                 busket: state.busket.map(elm => {
-                    elm.id === action.payload ? { ...elm, count: elm.count + 1 } : elm
+                    return elm.id === action.payload && elm.count > 1 ? { ...elm, count: elm.count - 1 } : elm
                 })
             }
 
